@@ -29,7 +29,7 @@ async def main():
     browser = Browser(
         config=BrowserConfig(
             # You'll need to adjust this path based on your OS
-            chrome_instance_path='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+            chrome_instance_path='C:\Program Files\Google\Chrome\Application\chrome.exe',
             headless=False  # Set to True if you don't want to see the browser
         )
     )
@@ -42,7 +42,11 @@ async def main():
                 {pdf_content}
 
                 Después de escribir el resumen, asegúrate de guardar el documento.""",
-        llm=ChatOpenAI(model='gpt-4o'),
+        llm=ChatOpenAI(
+            model='nombre-del-modelo-cargado-en-lmstudio',  # Reemplaza esto con el identificador del modelo en LM Studio
+            openai_api_base='http://localhost:1234/v1',  # URL del servidor de LM Studio
+            openai_api_key='lm-studio'  # Puede ser cualquier cadena, LM Studio no la usa por defecto
+        ),
         browser=browser,
     )
 
