@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI  # Se mantiene para la conexión con LM Studio
 from browser_use import Agent, Browser, BrowserConfig  # Se mantiene para la interacción con el navegador
 from pydantic.types import SecretStr # Importa SecretStr
+import lmstudio as lms
 
 
 load_dotenv()
@@ -50,11 +51,11 @@ async def main():
         5. Presenta este listado final. No intentes rellenar, modificar o enviar el formulario. Tu objetivo es solo extraer las preguntas y encontrar sus respuestas.
         """,
         llm=ChatOpenAI(
-            model='qwen3-8b',
-            # Reemplaza esto con el identificador del modelo en LM Studio
-            base_url='http://localhost:1234/v1',  # URL del servidor de LM Studio
-            api_key=secret_api_key
-        ),
+        model='qwen3-8b',  # El nombre/identificador del modelo cargado en LM Studio
+        openai_api_base='http://localhost:1234/v1',  # URL del servidor de LM Studio
+        openai_api_key=secret_api_key,
+        temperature=0 # Puedes ajustar la temperatura si lo deseas
+    ),
         browser=browser,
     )
 
