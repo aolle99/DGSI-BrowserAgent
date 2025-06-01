@@ -3,3 +3,4 @@ python-dotenv
 langchain-openai
 openai 
 browser_use
+playwright
